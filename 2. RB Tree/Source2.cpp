@@ -285,21 +285,6 @@ class RedBlackTree {
 		return 0;
 	}
 	
-	// ������ �-�� ������ (���������� �������)
-	// \param root ����� ������
-	// \param k ������� ����������
-	T& statistic(Node* root, int k) {
-		int lc = root->p1 ? root->p1->childCount + 1 : 0; 
-		if (k == lc + 1) {
-			return root->value;
-		}
-		if (k <= lc) {
-			return statistic(root->p1, k);
-		} else {
-			return statistic(root->p2, k - lc - 1);
-		}
-	}
-	
 	public:
 	
 	RedBlackTree() {
@@ -333,14 +318,6 @@ class RedBlackTree {
 		clear(treeRoot);
 		treeRoot=0;
 	}
-	
-	// ������ �-�� ������
-	T& statistic(int k) {
-		if (k > size) {
-			throw "Statistic out of range!";
-		}
-		statistic(treeRoot, k);
-	}
 };
 
 // ������� ��������
@@ -367,11 +344,7 @@ class CompanyDivision {
 	}
 };
 
-// ��������� �� ������� ���������, �� �����������
-const int MAXK = 100000;
-
 vector <CompanyDivision> compDivs; // ������ �������� ��������
-int k, s[MAXK]; // ������� ��������� �� ��� ����������
 
 // ���������� �������� �������� �� �� ����������
 void readCompanyDivisions() {
@@ -391,14 +364,6 @@ void readCompanyDivisions() {
 	}
 }
 
-// ���������� ���������
-void readStatistics() {
-	cin >> k;
-	for (int i = 0; i < k; i++) {
-		cin >> s[i];
-	}
-}
-
 // ���������� 
 int main() {
 	readCompanyDivisions();
@@ -408,8 +373,5 @@ int main() {
 		rbt.insert(c);
 	}
 	rbt.show();
-	for (int i = 0; i < k; i++) {
-		cout << "Statistic N" << s[i] << " = " << (string)rbt.statistic(s[i]) << endl;
-	}
 }
 
